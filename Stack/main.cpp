@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "IzrazValidator.h"
 #include "Sabirator.h"
+#include "PostFixRacunator.h"
+#include "PreFixRacunator.h"
 
 int main(void)
 {
@@ -17,17 +19,15 @@ int main(void)
 		std::cout << "Ne valja\n";
 	}
 
-	IzrazValidator racunator_postfix("10 6 + 2 - 7 / 10 *");
+	PostFixRacunator racunator_postfix("10 6 + 2 - 7 / 10 *");
 
 	std::cout << racunator_postfix.calculate_postfix() << '\n';
 
-	IzrazValidator racunator_prefix("* / - +  10 6 2 7 10");
+	PreFixRacunator racunator_prefix("* / - +  10 6 2 7 10");
 
-	racunator_prefix.prepare_prefix();
 	std::cout << racunator_prefix.calculate_prefix() << '\n';
 
-
-	Sabirator sab("482523", "234");
+	Sabirator sab("482523", "235345435534");
 		
 	sab.add();
 

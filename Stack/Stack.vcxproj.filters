@@ -27,6 +27,12 @@
     <ClCompile Include="Sabirator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PostFixRacunator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PreFixRacunator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stack.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sabirator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PostFixRacunator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PreFixRacunator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -129,11 +129,15 @@
   <ItemGroup>
     <ClCompile Include="IzrazValidator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PostFixRacunator.cpp" />
+    <ClCompile Include="PreFixRacunator.cpp" />
     <ClCompile Include="Sabirator.cpp" />
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IzrazValidator.h" />
+    <ClInclude Include="PostFixRacunator.h" />
+    <ClInclude Include="PreFixRacunator.h" />
     <ClInclude Include="Sabirator.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>

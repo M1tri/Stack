@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
-template <typename T>
 
+// Dinamicki stack (al ne preko LL jer to je retardirano nego dinamicki ko std::vector)
+
+template <typename T>
 class Stack
 {
 private:
@@ -30,6 +32,7 @@ public:
 		data[++top] = element;
 		return true;
 	}
+
 	T pop()
 	{
 		if (top == -1)
@@ -51,6 +54,7 @@ public:
 		return top == -1;
 	}
 
+	// nema mnogo smisla jer je dinamicki al aj
 	bool is_full()
 	{
 		return top == (size - 1);
@@ -91,7 +95,5 @@ private:
 		size = new_size;
 		delete[] pom;
 	}
-
-
 };
 

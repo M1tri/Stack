@@ -40,6 +40,9 @@ public:
 		while (!this->num2.is_empty())
 			this->num2.pop();
 
+		while (!this->rez.is_empty())
+			this->rez.pop();
+
 		for (int i = 0; i < l1; i++)
 		{
 			this->num1.push(num1[i]);
@@ -67,7 +70,6 @@ public:
 			this->rez.push(s);
 		}
 
-		
 		Stack<char>* leftover = nullptr;
 
 		if (num1.is_empty() && !num2.is_empty())
