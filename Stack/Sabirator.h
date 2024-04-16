@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Stack.h"
-#include <string>
+#include "String.h"
 #include <iostream>
 
 class Sabirator
@@ -10,13 +10,13 @@ private:
 	Stack<char> num1;
 	Stack<char> num2;
 	Stack<char> rez;
-	int cout;
+	int cout = 0;
 
 public:
-	Sabirator(const char* num1, const char* num2)
+	Sabirator(const String& num1, const String& num2)
 	{
-		int l1 = len(num1);
-		int l2 = len(num2);
+		int l1 = num1.length();
+		int l2 = num2.length();
 
 		for (int i = 0; i < l1; i++)
 		{
@@ -29,10 +29,10 @@ public:
 		}
 	}
 
-	void load(const char* num1, const char* num2)
+	void load(const String& num1, const String& num2)
 	{
-		int l1 = len(num1);
-		int l2 = len(num2);
+		int l1 = num1.length();
+		int l2 = num2.length();
 
 		while (!this->num1.is_empty())
 			this->num1.pop();
@@ -100,14 +100,13 @@ public:
 
 	void show_rez()
 	{
-		std::cout << "The result is:\n";
-		std::cout << cout;
+		if (cout != 0)
+			std::cout << cout;
 
 		while (!this->rez.is_empty())
 		{
 			std::cout << rez.pop();
 		}
-		std::cout << '\n';
 	}
 
 private:

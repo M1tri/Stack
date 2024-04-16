@@ -3,33 +3,26 @@
 #include <iostream>
 #include "Stack.h"
 #include <string>
+#include "String.h"
 
 class PostFixRacunator
 {
 private:
-	Stack<int> operands;
-	Stack<char> operators;
-	char* izraz;
-	int index = 0;
+	Stack<int> m_operands;
+	Stack<char> m_operators;
+	String m_izraz;
+	int m_index = 0;
 
 public:
-	PostFixRacunator(const char* izraz)
-	{
-		this->izraz = new char[len(izraz) + 1]();
-
-		for (int i = 0; i < len(izraz); i++)
-			this->izraz[i] = izraz[i];
-	}
-	~PostFixRacunator()
-	{
-		delete[] izraz;
-	}
+	PostFixRacunator(const char* izraz) : m_izraz(izraz) {}
+	PostFixRacunator(String izraz) : m_izraz(izraz) {}
+	~PostFixRacunator() {}
 
 	int calculate_postfix()
 	{
-		int lenght = len(izraz);
+		int length = m_izraz.length();
 
-		std::string buffer;
+		String buffer;
 
 		while (peek() != '\0')
 		{
@@ -42,8 +35,8 @@ public:
 					buffer.push_back(consume());
 				}
 
-				int n = std::stoi(buffer);
-				operands.push(n);
+				int n = mitri::Stoi(buffer);
+				m_operands.push(n);
 				buffer.clear();
 			}
 			else if (peek() == ' ')
@@ -52,81 +45,38 @@ public:
 			}
 			else if (peek() == '+')
 			{
-				int op2;
-				int op1;
-				try
-				{
-					op2 = operands.pop();
-					op1 = operands.pop();
-				}
-				catch (...)
-				{
-					std::cout << "Mising operands\n";
-					return 0;
-				}
+				int op2 = m_operands.pop();
+				int op1 = m_operands.pop();
 
 				int rez = op1 + op2;
-				operands.push(rez);
+				m_operands.push(rez);
 				consume();
 			}
 			else if (peek() == '-')
 			{
-				int op2;
-				int op1;
-				try
-				{
-					op2 = operands.pop();
-					op1 = operands.pop();
-				}
-				catch (...)
-				{
-					std::cout << "Mising operands\n";
-					return 0;
-				}
+				int op2 = m_operands.pop();
+				int op1 = m_operands.pop();
 
 				int rez = op1 - op2;
-
-				operands.push(rez);
+				m_operands.push(rez);
 				consume();
 			}
 			else if (peek() == '*')
 			{
-				int op2;
-				int op1;
-				try
-				{
-					op2 = operands.pop();
-					op1 = operands.pop();
-				}
-				catch (...)
-				{
-					std::cout << "Mising operands\n";
-					return 0;
-				}
+				int op2 = m_operands.pop();
+				int op1 = m_operands.pop();
 
 				int rez = op1 * op2;
-
-				operands.push(rez);
+				m_operands.push(rez);
 				consume();
 			}
 			else if (peek() == '/')
 			{
-				int op2;
-				int op1;
-				try
-				{
-					op2 = operands.pop();
-					op1 = operands.pop();
-				}
-				catch (...)
-				{
-					std::cout << "Mising operands\n";
-					return 0;
-				}
+				int op2 = m_operands.pop();
+				int op1 = m_operands.pop();
 
 				int rez = op1 / op2;
-
-				operands.push(rez);
+				m_operands.push(rez);
 				consume();
 			}
 			else
@@ -136,9 +86,9 @@ public:
 			}
 		}
 
-		int result = operands.pop();
+		int result = m_operands.pop();
 
-		if (!operands.is_empty())
+		if (!m_operands.is_empty())
 		{
 			std::cout << "Ne valja :(\n";
 		}
@@ -148,15 +98,15 @@ public:
 
 	char peek() const
 	{
-		if (index > len(izraz))
+		if (m_index > m_izraz.length())
 			return '\0';
 
-		return izraz[index];
+		return m_izraz[m_index];
 	}
 
 	char consume()
 	{
-		return izraz[index++];
+		return m_izraz[m_index++];
 	}
 
 private:

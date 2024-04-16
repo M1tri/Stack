@@ -1,44 +1,35 @@
 #pragma once
 #include "Stack.h"
-#include <string>
+#include "String.h"
 
 class IzrazValidator
 {
 private:
-	Stack<int> operands;
-	Stack<char> operators;
-	char* izraz;
-	int index = 0;
+	Stack<int> m_operands;
+	Stack<char> m_operators;
+	String m_izraz;
+	int m_index = 0;
 
 public:
-	IzrazValidator(const char* izraz)
-	{
-		this->izraz = new char[len(izraz) + 1]();
-
-		for (int i = 0; i < len(izraz); i++)
-			this->izraz[i] = izraz[i];
-	}
-	~IzrazValidator()
-	{
-		delete[] izraz;
-	}
+	IzrazValidator(const String& izraz): m_izraz(izraz) {}
+	~IzrazValidator() {}
 
 	bool validate()
 	{
-		int lenght = len(izraz);
+		int lenght = m_izraz.length();
 
 		bool valid = true;
 		try
 		{
 			for (int i = 0; i < lenght; i++)
 			{
-				if (izraz[i] == '(' || izraz[i] == '[' || izraz[i] == '{')
+				if (m_izraz[i] == '(' || m_izraz[i] == '[' || m_izraz[i] == '{')
 				{
-					operands.push(izraz[i]);
+					m_operands.push(m_izraz[i]);
 				}
-				else if (izraz[i] == ')' || izraz[i] == ']' || izraz[i] == '}')
+				else if (m_izraz[i] == ')' || m_izraz[i] == ']' || m_izraz[i] == '}')
 				{
-					if (operands.pop() != match(izraz[i]))
+					if (m_operands.pop() != match(m_izraz[i]))
 					{
 						valid = false;
 						break;
@@ -51,7 +42,7 @@ public:
 			valid = false;
 		}
 
-		if (operands.is_empty() && valid)
+		if (m_operands.is_empty() && valid)
 			return true;
 		else
 			return false;

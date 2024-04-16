@@ -3,43 +3,33 @@
 #include <iostream>
 #include "Stack.h"
 #include <string>
+#include "String.h"
 
 class PreFixRacunator
 {
 private:
-	Stack<int> operands;
-	Stack<char> operators;
-	char* izraz;
-	int index = 0;
+	Stack<int> m_operands;
+	Stack<char> m_operators;
+	String m_izraz;
+	int m_index = 0;
 
 public:
-	PreFixRacunator(const char* izraz)
-	{
-		this->izraz = new char[len(izraz) + 1]();
-
-		for (int i = 0; i < len(izraz); i++)
-			this->izraz[i] = izraz[i];
-	}
-	~PreFixRacunator()
-	{
-		delete[] izraz;
-	}
-
-	// prepares operands and operators
+	PreFixRacunator(const char* izraz) : m_izraz(izraz) {}
+	~PreFixRacunator() {}
 
 	int calculate_prefix()
 	{
 		prepare_prefix();
 
-		if (operands.is_empty() || operators.is_empty())
+		if (m_operands.is_empty() || m_operators.is_empty())
 		{
 			std::cout << "Zovi prepare_prefix majmune\n";
 			return 0;
 		}
 
-		while (!operators.is_empty())
+		while (!m_operators.is_empty())
 		{
-			char op = operators.pop();
+			char op = m_operators.pop();
 
 			if (op == '+')
 			{
@@ -48,8 +38,8 @@ public:
 
 				try
 				{
-					op1 = operands.pop();
-					op2 = operands.pop();
+					op1 = m_operands.pop();
+					op2 = m_operands.pop();
 				}
 				catch (...)
 				{
@@ -58,7 +48,7 @@ public:
 				}
 
 				int rez = op1 + op2;
-				operands.push(rez);
+				m_operands.push(rez);
 			}
 			else if (op == '-')
 			{
@@ -66,8 +56,8 @@ public:
 				int op1;
 				try
 				{
-					op1 = operands.pop();
-					op2 = operands.pop();
+					op1 = m_operands.pop();
+					op2 = m_operands.pop();
 				}
 				catch (...)
 				{
@@ -76,7 +66,7 @@ public:
 				}
 
 				int rez = op1 - op2;
-				operands.push(rez);
+				m_operands.push(rez);
 			}
 			else if (op == '*')
 			{
@@ -84,8 +74,8 @@ public:
 				int op1;
 				try
 				{
-					op1 = operands.pop();
-					op2 = operands.pop();
+					op1 = m_operands.pop();
+					op2 = m_operands.pop();
 				}
 				catch (...)
 				{
@@ -94,7 +84,7 @@ public:
 				}
 
 				int rez = op1 * op2;
-				operands.push(rez);
+				m_operands.push(rez);
 			}
 			else if (op == '/')
 			{
@@ -102,8 +92,8 @@ public:
 				int op1;
 				try
 				{
-					op1 = operands.pop();
-					op2 = operands.pop();
+					op1 = m_operands.pop();
+					op2 = m_operands.pop();
 				}
 				catch (...)
 				{
@@ -112,14 +102,14 @@ public:
 				}
 
 				int rez = op1 / op2;
-				operands.push(rez);
+				m_operands.push(rez);
 			}
 		}
 
 
-		int result = operands.pop();
+		int result = m_operands.pop();
 
-		if (!operands.is_empty())
+		if (!m_operands.is_empty())
 		{
 			std::cout << "Sjebo si se :(\n";
 		}
@@ -129,15 +119,15 @@ public:
 
 	char peek() const
 	{
-		if (index > len(izraz))
+		if (m_index > m_izraz.length())
 			return '\0';
 
-		return izraz[index];
+		return m_izraz[m_index];
 	}
 
 	char consume()
 	{
-		return izraz[index++];
+		return m_izraz[m_index++];
 	}
 
 private:
@@ -151,13 +141,13 @@ private:
 	}
 	void prepare_prefix()
 	{
-		int lenght = len(izraz);
+		int lenght = m_izraz.length();
 
 		while (peek() != '\0' && !std::isdigit(peek()))
 		{
 			if (peek() == '/' || peek() == '*' || peek() == '+' || peek() == '-')
 			{
-				operators.push(consume());
+				m_operators.push(consume());
 			}
 			else if (peek() == ' ')
 			{
@@ -175,14 +165,14 @@ private:
 		{
 			if (std::isdigit(peek()))
 			{
-				std::string buffer;
+				String buffer;
 				buffer.push_back(consume());
 
 				while (std::isdigit(peek()))
 				{
 					buffer.push_back(consume());
 				}
-				int n = std::stoi(buffer);
+				int n = mitri::Stoi(buffer);
 				pom.push(n);
 			}
 			else if (peek() == ' ')
@@ -198,7 +188,7 @@ private:
 
 		while (!pom.is_empty())
 		{
-			operands.push(pom.pop());
+			m_operands.push(pom.pop());
 		}
 
 	}

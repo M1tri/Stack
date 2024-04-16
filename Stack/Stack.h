@@ -7,62 +7,67 @@ template <typename T>
 class Stack
 {
 private:
-	int size;
-	int top;
-	T* data;
+	int m_size;
+	int m_top;
+	T* m_data;
 
 public:
-	Stack(int size = 10) :size(size), top(-1)
+	Stack(int size = 10) :m_size(size), m_top(-1)
 	{
-		data = new T[size]();
+		m_data = new T[size]();
 	}
 
 	~Stack()
 	{
-		delete[] data;
+		delete[] m_data;
 	}
 
 	bool push(T element)
 	{
-		if (top == size - 1)
+		if (m_top == m_size - 1)
 		{
-			resize(2 * size);
+			resize(2 * m_size);
 		}
 
-		data[++top] = element;
+		m_data[++m_top] = element;
 		return true;
 	}
 
 	T pop()
 	{
-		if (top == -1)
+		if (m_top == -1)
 			throw "Prazan stek\n";
 
-		return data[top--];
+		return m_data[m_top--];
 	}
 
-	T read_top()
+	T read_top() const
 	{
-		if (top == -1)
+		if (m_top == -1)
 			throw "Prazan stek\n";
 
-		return data[top];
+		return m_data[m_top];
 	}
 
-	bool is_empty()
+	bool is_empty() const
 	{
-		return top == -1;
+		return m_top == -1;
 	}
 
 	// nema mnogo smisla jer je dinamicki al aj
-	bool is_full()
+	bool is_full() const
 	{
-		return top == (size - 1);
+		return m_top == (m_size - 1);
 	}
 
-	int curr_size()
+	int curr_size() const
 	{
-		return top + 1;
+		return m_top + 1;
+	}
+
+	void clear()
+	{
+		m_top = -1;
 	}
 
 private:
@@ -71,29 +76,30 @@ private:
 	{
 		T* pom = new T[new_size]();
 
-		int limit = top + 1;
+		int limit = m_top + 1;
 
-		if (new_size < top)
+		if (new_size < m_top)
 		{
 			limit = new_size;
 		}
 
 		for (int i = 0; i < limit; i++)
 		{
-			pom[i] = data[i];
+			pom[i] = m_data[i];
 		}
 
-		delete[] data;
+		delete[] m_data;
 
-		data = new T[new_size]();
+		m_data = new T[new_size]();
 
 		for (int i = 0; i < limit; i++)
 		{
-			data[i] = pom[i];
+			m_data[i] = pom[i];
 		}
 
-		size = new_size;
+		m_size = new_size;
 		delete[] pom;
 	}
 };
+
 

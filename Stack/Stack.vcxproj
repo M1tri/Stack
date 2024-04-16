@@ -102,7 +102,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -129,17 +129,23 @@
   <ItemGroup>
     <ClCompile Include="IzrazValidator.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PostFixKonvertator.cpp" />
     <ClCompile Include="PostFixRacunator.cpp" />
     <ClCompile Include="PreFixRacunator.cpp" />
     <ClCompile Include="Sabirator.cpp" />
     <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="StringReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IzrazValidator.h" />
+    <ClInclude Include="PostFixKonvertator.h" />
     <ClInclude Include="PostFixRacunator.h" />
     <ClInclude Include="PreFixRacunator.h" />
     <ClInclude Include="Sabirator.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="StringReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
