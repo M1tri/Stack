@@ -48,6 +48,11 @@ int main(void)
 
 	std::cout << "---------------\n";
 
+
+	PreFixRacunator calc("**+ 4 / 3 5 - 9 3 4");
+
+	std::cout << calc.calculate_prefix() << '\n';
+
 	String num1 = "482523";
 	String num2 = "235345435534";
 
